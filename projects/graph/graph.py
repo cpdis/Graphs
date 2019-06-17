@@ -28,7 +28,7 @@ class Graph:
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        # Breadth first search uses queues so...
+        # Breadth first uses queues so...
         # Create a queue
         queue = Queue()
         # And enqueue the starting point
@@ -52,7 +52,7 @@ class Graph:
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        # Depth first search uses stacks so...
+        # Depth first uses stacks so...
         # Create a stack
         stack = Stack()
         # Push the starting point to the stack
@@ -72,13 +72,21 @@ class Graph:
                     stack.push(next_v)
         
         return visited
-    def dft_recursive(self, starting_vertex):
+    def dft_recursive(self, starting_vertex, visited=None):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         This should be done using recursion.
         """
-        pass  # TODO
+        if visited is None:
+            visited = set()
+        
+        visited.add(starting_vertex)
+
+        for child in self.vertices[starting_vertex]:
+            if child is not in visited:
+                dft_recursive(self, child, visited)
+
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
