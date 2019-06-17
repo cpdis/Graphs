@@ -93,18 +93,79 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        # Breadth first uses queues so...
+        # Create a queue
+        queue = Queue()
+        # And enqueue the path to the starting point
+        queue.enqueue([starting_vertex])
+
+        # Like before, create a set for visited vertices
+        visited = set()
+
+        # Basically follow the pseudocode from the lecture, but 
+        # add code to check if the destination vertex has been reached
+        while queue.size() > 0:
+            path = queue.dequeue()
+
+            # Get the last vertex in the path
+            vertex = path[-1]
+
+            # Check if the vertex has been visited or not
+            if vertex not in visited:
+                
+                # Check if it is the destination vertex
+                if vertex == destination_vertex:
+                    return path
+
+                visited.add(vertex)
+
+                # Add the path to its children to the queue
+                for next_v in self.vertices[vertex]:
+                    new_path = path.copy()
+                    new_path.append(next_v)
+                    queue.enqueue(new_path)
+        
+        return None
+
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        # Depth first search uses stacks so...
+        # Create a stack
+        stack = Stack()
+        # And enqueue the path to the starting point
+        stack.push([starting_vertex])
 
+        # Like before, create a set for visited vertices
+        visited = set()
 
+        # Basically follow the pseudocode from the lecture, but 
+        # add code to check if the destination vertex has been reached
+        while stack.size() > 0:
+            path = stack.pop()
 
+            # Get the last vertex in the path
+            vertex = path[-1]
 
+            # Check if the vertex has been visited or not
+            if vertex not in visited:
+                
+                # Check if it is the destination vertex
+                if vertex == destination_vertex:
+                    return path
+
+                visited.add(vertex)
+
+                # Add the path to its children to the queue
+                for next_v in self.vertices[vertex]:
+                    new_path = path.copy()
+                    new_path.append(next_v)
+                    stack.push(new_path)
+        
+        return None
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
