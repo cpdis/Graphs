@@ -52,7 +52,26 @@ class Graph:
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Depth first search uses stacks so...
+        # Create a stack
+        stack = Stack()
+        # Push the starting point to the stack
+        stack.push(starting_vertex)
+
+        # Create a set for visited vertices
+        visited = set()
+
+        # Basically follow the pseudocode from the lecture
+        while stack.size() > 0:
+            v = stack.pop()
+
+            if v not in visited:
+                visited.add(v)
+
+                for next_v in self.vertices[v]:
+                    stack.push(next_v)
+        
+        return visited
     def dft_recursive(self, starting_vertex):
         """
         Print each vertex in depth-first order
