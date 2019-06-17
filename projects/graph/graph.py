@@ -7,6 +7,7 @@ class Graph:
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
     def __init__(self):
         self.vertices = {}
+
     def add_vertex(self, vertex):
         """
         Add a vertex to the graph.
@@ -27,7 +28,25 @@ class Graph:
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # Breadth first search uses queues so...
+        # Create a queue
+        queue = Queue()
+        # And enqueue the starting point
+        queue.enqueue(starting_vertex)
+
+        # Create a set for visited vertices
+        visited = set()
+
+        # Basically follow the pseudocode from the lecture
+        while queue.size() > 0:
+            v = queue.dequeue()
+
+            if v not in visited:
+                visited.add(v)
+
+                for next_v in self.vertices[v]:
+                    queue.enqueue(next_v)
+
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
