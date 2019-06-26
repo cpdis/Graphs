@@ -29,3 +29,30 @@ class Stack():
 
     def size(self):
         return len(self.stack)
+
+
+def dfs(starting_vertex, family):
+    # Depth first search uses stacks so...
+    # Create a stack
+    stack = Stack()
+    stack.push([starting_vertex])
+
+    # Create an array for visited vertices
+    visited = []
+
+    while stack.size() > 0:
+        path = stack.pop()
+
+        # Get the last vertex in the path
+        vertex = path[-1]
+
+        # Check if the vertex has been visited or not
+        if vertex not in visited:
+            visited.append(vertex)
+
+        for descendant in family[vertex]:
+            new_path = path.copy()
+            new_path.append(descendant)
+            stack.push(new_path)
+
+    return visited[-1]
