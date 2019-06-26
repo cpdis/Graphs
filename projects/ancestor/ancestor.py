@@ -12,6 +12,7 @@ A Stack class can be based on previous assignments as well as the DFS implementa
 earliest_ancestor method will need to be written to actually implement the logic provided
 in the problem statement.
 '''
+from collections import defaultdict
 
 
 class Stack():
@@ -56,3 +57,21 @@ def dfs(starting_vertex, family):
             stack.push(new_path)
 
     return visited[-1]
+
+
+def earliest_ancestor(family_tree, person):
+    # default items are created using list(), which returns a new empty list object.
+    family = defaultdict(list)
+
+    # Creates a dictionary where each child (key) has parents (values)
+    for parent, child in family_tree:
+        family[child].append(parent)
+
+    # If the child has no parents 🤷🏼‍♂️
+    if person not in family:
+        return -1
+
+    # Perform DFS using the specified ID and the family list
+    earliest = dfs(person, family)
+
+    return earliest
